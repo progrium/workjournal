@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="row" style="margin-top: 50px;">
+  <div class="span10 offset2 column">
+    <div class="page-header"><h2>What did you get done today? <small>Saturday, September 3</small></h2></div>
+    {% if profile.entry_today and not edit %}
+    <p>{{profile.entry_today.body}}</p>
+    <a href="?edit">Edit</a>
+    {% else %}
+    <form method="post" class="form-stacked">
+      <fieldset>
+        <legend></legend>
+        <div class="clearfix">
+          <div class="input" style="margin-bottom: 10px;">
+            <textarea class="xxlarge" id="textarea" name="body" style="height: 80px;">{{profile.entry_today.body}}</textarea>  
+          </div>
+          <button type="submit" class="btn">Save</button>
+        </div><!-- /clearfix -->
+      </fieldset>
+    </form>
+    {% endif %}
+  </div>
+</div>
+
+<div class="row">
+  <div class="span10 offset2 column">
+    <div class="page-header"><h1><small>Yesterday, Friday, September 2</small></h1></div>  
+    {% for person in profile.following %}
+    <h4><img src="http://www.gravatar.com/avatar/{{gravatar_hash}}?s=20" style="vertical-align: top; margin-right: 6px; margin-top: 8px;" /><a href="#" style="color: black;">{{person.username}}</a></h4>
+    {% for entry in person.entries %}
+    <p>{{entry.date}}</p>
+    <blockquote>
+      <p>{{entry.summary}}</p>
+      {% if entry.details %}<a href="#" style="float:right;">&darr; More&hellip;</a>{% endif %}
+    </blockquote>
+    {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

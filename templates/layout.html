@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <title>WorkJournal</title>
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.2.0.min.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        // Dropdown example for topbar nav
+        // ===============================
+        
+        $("body").bind("click", function (e) {
+          $('.dropdown-toggle, .menu').parent("li").removeClass("open");
+        });
+        $(".dropdown-toggle, .menu").click(function (e) {
+          var $li = $(this).parent("li").toggleClass('open');
+          return false;
+        });
+      });
+    </script>
+    <script type="text/javascript">
+      function toggleFullEntry(entryId) {
+        $('#summary-'+entryId).toggle(); 
+        $('#full-'+entryId).toggle();
+      }
+    </script>
+    <style type="text/css">
+      input,textarea,select,.uneditable-input{height:28px;}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="topbar">
+        <div class="topbar-inner">
+          <div class="container" style="padding-left: 256px;">
+            <h3><a href="#">WorkJournal</a></h3>
+            <form>
+              <input type="text" placeholder="Search" style="margin-right: 10px;" />
+            </form>
+            <ul class="nav">
+              <li class="active"><a href="/">Home</a></li>
+              <li><a href="/{{profile.username}}">Journal</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle">
+                  <img src="http://www.gravatar.com/avatar/{{profile.gravatar_hash}}?s=20" style="vertical-align: top; margin-right: 6px;" />{{profile.username}}
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="/settings">Settings</a></li>
+                  <li><a href="/logout">Log out</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      {% block content %}{% endblock %}
+      
+    </div>
+  </body>
+</htmL>

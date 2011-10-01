@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="row" style="margin-top: 50px;">
+  <div class="span10 offset2 column">
+    <div class="page-header"><h2>Settings</h2></div>
+    <form method="post">
+      <fieldset>
+        <div class="clearfix">
+          <label for="timezone_offset">Timezone Offset</label>
+          <div class="input">
+            <input class="xlarge" id="timezone_offset" name="timezone_offset" size="30" type="text" value="{{profile.timezone_offset}}" />
+          </div>
+        </div>
+        <div class="clearfix">
+          <label for="digest_hour">Digest Delivery Hour</label>
+          <div class="input">
+            <input class="xlarge" id="digest_hour" name="digest_hour" size="30" type="text" value="{{profile.digest_hour}}" />
+          </div>
+        </div>
+        <div class="clearfix">
+          <label for="ask_hour">Journal Reminder Hour</label>
+          <div class="input">
+            <input class="xlarge" id="ask_hour" name="ask_hour" size="30" type="text" value="{{profile.ask_hour}}" />
+          </div>
+        </div>
+        <div class="actions">
+          <input type="submit" class="btn primary" value="Save Changes" />
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+{% endblock %}
