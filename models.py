@@ -10,7 +10,7 @@ class Profile(db.Model):
     user = db.UserProperty()
     timezone_offset = db.IntegerProperty(default=-5)
     digest_hour = db.IntegerProperty(default=9)
-    ask_hour = db.IntegerProperty(default=17)
+    prompt_hour = db.IntegerProperty(default=17)
     
     def today(self):
         today = datetime.datetime.fromtimestamp(time.mktime(datetime.date.today().timetuple()))
@@ -22,6 +22,14 @@ class Profile(db.Model):
     def now(self):
         return datetime.datetime.now() + UTC_DELTA + datetime.timedelta(hours=self.timezone_offset)
     
+    @property
+    def digest_now(self):
+    	return self.now().hour == self.digest_hour
+
+    @property
+    def prompt_now(self):
+    	return self.now().hour == self.prompt_hour
+
     @property
     def entry_today(self):
         return Entry.all().filter('user =', self.user) \

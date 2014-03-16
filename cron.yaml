@@ -1,0 +1,7 @@
+cron:
+- description: daily digest
+  url: /_tasks/digest
+  schedule: every 1 hours
+- description: daily prompt
+  url: /_tasks/prompt
+  schedule: every 1 hours
