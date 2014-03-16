@@ -1,3 +1,6 @@
+# Workjournal
+
+Simple web app to help collect insight on what a team is up to with email integration.
 
 ## Todo
 
