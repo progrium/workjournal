@@ -1,22 +1,25 @@
 {% extends 'layout.html' %}
 {% block content %}
-
-<h1><img src="http://www.gravatar.com/avatar/{{gravatar_hash}}?s=40" style="vertical-align: top; margin-right: 6px; margin-top: 8px;" /> {{profile.username}}'s Journal</h1>
+<div class="row">
+  <div class="col-md-12">
+    <h1><img src="http://www.gravatar.com/avatar/{{gravatar_hash}}?s=40" 
+          style="vertical-align: bottom; margin-right: 6px; margin-top: 8px;" /> 
+        {{profile.username}}</h1>
+  </div>
+</div>
 
 {% for entry in profile.entries %}
 <div class="row">
-  <div class="span10 offset2 column">
+  <div class="col-md-12">
     <div class="page-header"><h1><small>{{entry.created}}</small></h1></div>  
-    <blockquote>
-      <div id="summary-{{entry.key.id}}">
-      <p>{{entry.summary}}</p>
-      {% if entry.details %}<a href="javascript:toggleFullEntry('{{entry.key.id}}')" style="float:right;">&darr; More</a>{% endif %}
-      </div>
-      <div id="full-{{entry.key.id}}" style="display: none;">
-        <p>{{entry.body}}</p>
-        <a href="javascript:toggleFullEntry('{{entry.key.id}}')" style="float:right;">&uarr; Less</a>
-      </div>
-    </blockquote>
+    <div id="summary-{{entry.key.id}}">
+    <p>{{entry.summary}}</p>
+    {% if entry.details %}<a href="javascript:toggleFullEntry('{{entry.key.id}}')" style="float:right;">&darr; More</a>{% endif %}
+    </div>
+    <div id="full-{{entry.key.id}}" style="display: none;">
+      <p>{{entry.body|nl2br}}</p>
+      <a href="javascript:toggleFullEntry('{{entry.key.id}}')" style="float:right;">&uarr; Less</a>
+    </div>
   </div>
 </div>
 {% endfor %}

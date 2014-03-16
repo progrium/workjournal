@@ -1,8 +1,17 @@
-application: twilio-workjournal
+application: workjournal
 version: 1
-runtime: python
+runtime: python27
 api_version: 1
+threadsafe: yes
 
 handlers:
+- url: /static
+  static_dir: static
 - url: .*
-  script: main.py
+  script: main.app
+
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest
