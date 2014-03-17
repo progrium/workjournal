@@ -4,6 +4,7 @@ import time
 
 from google.appengine.ext import db
 
+# Used to normalize to UTC from wherever the app is running
 UTC_DELTA = datetime.datetime.utcnow() - datetime.datetime.now()
 
 class Profile(db.Model):
@@ -12,7 +13,7 @@ class Profile(db.Model):
     timezone_offset = db.IntegerProperty(default=-5)
     digest_hour = db.IntegerProperty(default=9)
     prompt_hour = db.IntegerProperty(default=17)
-    
+
     def today(self):
         today = datetime.datetime.fromtimestamp(time.mktime(datetime.date.today().timetuple()))
         return today + UTC_DELTA + datetime.timedelta(hours=self.timezone_offset)

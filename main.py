@@ -90,7 +90,7 @@ def digest():
                         body += "## {0}\n\n{1}\n\n".format(
                             p.username, entry.summary)
                         if entry.details:
-                            body += "More details: https://{0}/{1}\n\n".format(
+                            body += "More details: {0}{1}\n\n".format(
                                 request.url_root, p.username)
                 if send_digest:
                     mail.send_mail(sender=ADMIN_EMAIL,
@@ -116,7 +116,7 @@ Hello!
 
 Take a moment to visit this URL and jot down what you did today:
 
-https://{0}?edit
+{0}?edit
 
 Thanks, have a good day!
 
