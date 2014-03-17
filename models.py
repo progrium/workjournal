@@ -8,6 +8,7 @@ UTC_DELTA = datetime.datetime.utcnow() - datetime.datetime.now()
 
 class Profile(db.Model):
     user = db.UserProperty()
+    username = db.StringProperty()
     timezone_offset = db.IntegerProperty(default=-5)
     digest_hour = db.IntegerProperty(default=9)
     prompt_hour = db.IntegerProperty(default=17)
@@ -53,17 +54,20 @@ class Profile(db.Model):
     def gravatar_hash(self):
         return hashlib.md5(self.user.email().strip().lower()).hexdigest()
     
-    @property
-    def username(self):
-        return self.user.nickname().split('@')[0]    
-    
     @classmethod
     def get_or_create(cls, user):
         p = cls.all().filter('user =', user).get()
         if not p:
-            p = cls(user=user)
+            p = cls(user=user, username=user.nickname().split('@')[0])
             p.put()
+        if not p.username:
+        	p.username = user.nickname().split('@')[0]
+        	p.put()
         return p
+
+    @classmethod
+    def get_by_username(cls, username):
+    	return cls.all().filter('username =', username).get()
 
 class Entry(db.Model):
     body = db.TextProperty()

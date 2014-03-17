@@ -72,7 +72,7 @@ def logout():
 @app.route('/<username>')
 @login_required
 def journal(username):
-    profile = Profile.get_or_create(users.get_current_user())
+    profile = Profile.get_by_username(username)
     return jinja.get_template('journal.html').render(locals())
 
 @app.route('/_tasks/digest')
