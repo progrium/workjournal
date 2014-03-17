@@ -21,8 +21,14 @@
     {% for person in profile.following %}
     {% if person.entry_yesterday %}
     <h4><a href="/{{person.username}}">{{person.username}}</a></h4> 
-    <p>{{person.entry_yesterday.summary}}</p>
-    {% if person.entry_yesterday.details %}<a href="#" style="float:right;">&darr; More&hellip;</a>{% endif %}
+    <div id="summary-{{person.entry_yesterday.key.id}}">
+      <p>{{person.entry_yesterday.summary}}</p>
+      {% if person.entry_yesterday.details %}<a href="javascript:toggleFullEntry('{{person.entry_yesterday.key.id}}')" style="float:right;">&darr; More</a>{% endif %}
+    </div>
+    <div id="full-{{person.entry_yesterday.key.id}}" style="display: none;">
+      <p>{{person.entry_yesterday.body|nl2br}}</p>
+      <a href="javascript:toggleFullEntry('{{person.entry_yesterday.key.id}}')" style="float:right;">&uarr; Less</a>
+    </div>
     {% endif %}
     {% endfor %}
   </div>
