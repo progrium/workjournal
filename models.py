@@ -1,4 +1,4 @@
-import datetime
+11import datetime
 import hashlib
 import time
 
@@ -26,11 +26,11 @@ class Profile(db.Model):
     
     @property
     def digest_now(self):
-    	return self.now().hour == self.digest_hour
+    	return self.now().hour == self.digest_hour and self.now().weekday() < 5
 
     @property
     def prompt_now(self):
-    	return self.now().hour == self.prompt_hour
+    	return self.now().hour == self.prompt_hour and self.now().weekday() < 5
 
     @property
     def entry_today(self):
